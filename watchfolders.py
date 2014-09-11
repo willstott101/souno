@@ -13,7 +13,6 @@ class FolderWatcher:
 
         #TODO - Populate playlists with .mp3 files.
         #Probably a method for finding files with given extensions in data.py
-        #Look into meta-data ONLY AFTER SUCCESSFULLY PLAYING A SONG.
 
         self.folders = data.playlists.parser.items(section='watchfolders')
         data.playlists.save()
@@ -80,6 +79,6 @@ class FolderWatcher:
         gui.watchfolders[len(gui.watchfolders) -1].grid(row=y, column=2)
 
     def __init__(self):
-        '''Loads watchfolders from config at playlists'''
+        '''Loads watchfolders from config'''
         gui.watchfolders = []
         self.update()

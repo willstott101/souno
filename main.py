@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import sys
 sys.path.insert(0, 'ext-libs') 
 sys.path.insert(0, 'libs')
