@@ -26,7 +26,17 @@
 *.sql
 *.sqlite
 *.ini
- 
+
+# Editor project files #
+######################
+.idea/**/*
+
+# Pychache stuff #
+######################
+*/__pycache__/**/*
+__pycache__/**/*
+.pyc 
+
 # OS generated files #
 ######################
 .DS_Store
