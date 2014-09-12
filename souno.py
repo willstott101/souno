@@ -26,8 +26,7 @@ data.cfg_config = datastore.DataStore('config.ini', defaults = {
 data.cfg_config.save()
 
 #Load the user's playlists and stuff.
-data.cfg_watchfolders = datastore.DataStore('playlists.ini')
-data.cfg_watchfolders.save()
+data.cfg_watchfolders = datastore.DataStore('watchfolders.ini')
 
 #Create a folderwatcher object to watch folders.
 data.folderwatcher = watchfolders.FolderWatcher()
