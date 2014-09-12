@@ -14,8 +14,11 @@ class FolderWatcher:
         #TODO - Populate playlists with .mp3 files.
         #Probably a method for finding files with given extensions in data.py
 
-        self.folders = data.playlists.parser.items(section='watchfolders')
-        data.playlists.save()
+        #TODO - Create watchfolder specific .ini, store more info about each watchfolder.
+        #i.e. date last crawled, and stuff.
+
+        self.folders = data.cfg_watchfolders.parser.items(section='watchfolders')
+        data.cfg_watchfolders.save()
         return self.folders
 
     def new(self, name=None, path=None):
@@ -31,11 +34,11 @@ class FolderWatcher:
         if name is None:
             #Find next available default name
             i = 1
-            while data.playlists.has_option('watchfolders', 'folder' + str(i)):
+            while data.cfg_watchfolders.has_option('watchfolders', 'folder' + str(i)):
                 i += 1
             name = 'folder' + str(i)
         #Add the folder to the file
-        data.playlists.parser.set('watchfolders', name, path)
+        data.cfg_watchfolders.parser.set('watchfolders', name, path)
         #Apply change
         self.update()
         #Update gui (assumes visible when folder added)
@@ -44,8 +47,8 @@ class FolderWatcher:
     def remove(self, name):
         '''Removes given watchfolder from the list.'''
         print('Clicked remove button for: ' + name)
-        if data.playlists.has_option('watchfolders', name):
-            data.playlists.parser.remove_option('watchfolders', name)
+        if data.cfg_watchfolders.has_option('watchfolders', name):
+            data.cfg_watchfolders.parser.remove_option('watchfolders', name)
         self.update()
         self.display(gui.Home)
 

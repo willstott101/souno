@@ -20,13 +20,14 @@ gui.Home.geometry('1200x800+200+100')
 gui.Home.update()
 
 #Read the config file, and/or define and save defaults.
-config = datastore.DataStore('config.ini', defaults = {
+data.cfg_config = datastore.DataStore('config.ini', defaults = {
 	'lang': 'EN'
 })
-config.save()
+data.cfg_config.save()
 
 #Load the user's playlists and stuff.
-data.playlists = datastore.DataStore('playlists.ini')
+data.cfg_watchfolders = datastore.DataStore('playlists.ini')
+data.cfg_watchfolders.save()
 
 #Create a folderwatcher object to watch folders.
 data.folderwatcher = watchfolders.FolderWatcher()
