@@ -10,14 +10,19 @@ class Player:
         '''Called when the song ends.'''
         gui.Home.title('Souno Beta Player, Nothing playing')
 
-    def meta_changed_callback(self, event, arg):
+    def meta_parsed_callback(self, event):
         '''Handles the changing of the meta-data display.'''
         gui.Home.title('Souno Beta Player, %s' % 'Now Playing')
         print(event)
-        print(arg)
 
     def change_media_callback(self, event):
-        gui.Home.title('Souno Beta Player, %s' % self.media.get_meta(vlc.Meta.Title))
+        if self.media.is_parsed():
+            print('media was parsed, setting title.')
+            gui.Home.title('Souno Beta Player, %s' % self.media.get_meta(vlc.Meta.Title))
+        else:
+            print("media wasn't parsed, setting callback.")
+            self.media_event_manager = self.media.event_manager()
+            self.media_event_manager.event_attach(vlc.EventType.MediaParsedChanged, self.meta_parsed_callback)
 
 
     def __init__(self):
@@ -44,6 +49,4 @@ class Player:
         self.media = self.instance.media_new(movie)
         self.player.set_media(self.media)
         self.player.play()
-        self.media_event_manager = self.media.event_manager()
-        self.media_event_manager.event_attach(vlc.EventType.MediaMetaChanged, self.meta_changed_callback)
         self.media.parse_async()

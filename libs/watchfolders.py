@@ -57,6 +57,8 @@ class FolderWatcher:
         self.display(gui.Home)
 
     def display(self, parent):
+        ''' Writes watchfolders to a given gui frame'''
+        #TODO- Replace with a generic list gui function.
         # Clear the current objects
         for f in gui.watchfolders:
             f.destroy()
